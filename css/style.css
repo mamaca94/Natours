@@ -7,10 +7,12 @@ Dark green: #28b485
 
 */
 
-* {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 html {
@@ -24,6 +26,7 @@ body {
   line-height: 1.7;
   color: #777;
   padding: 3rem;
+  box-sizing: border-box;
 }
 
 .header {
@@ -51,7 +54,8 @@ body {
 }
 
 .logo:hover {
-  animation: moveInRight 3s ease-out;
+  height: 3.7rem;
+  transition: all 0.3s;
 }
 
 .text-box {
@@ -118,6 +122,17 @@ body {
     transform: translate(0);
   }
 }
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
 
 .btn:link,
 .btn:visited {
@@ -128,6 +143,8 @@ body {
   display: inline-block;
   transition: all 0.2s;
   border-radius: 10rem;
+
+  position: relative;
 }
 
 .btn:hover {
@@ -143,4 +160,32 @@ body {
 .btn-white {
   background-color: #fff;
   color: #777;
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 10rem;
+
+  position: absolute;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  animation-fill-mode: backwards;
 }
